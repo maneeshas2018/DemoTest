@@ -1,4 +1,8 @@
-FROM openjdk:8
-ADD /eclipse-workspace/springboot-first-app/target/surefire-reports/springboot-first-app-0.0.1-SNAPSHOT.jar dockerspringboot-first-app-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","dockerspringboot-first-app-0.0.1-SNAPSHOT.jar"]
-EXPOSE 9000
+FROM ubuntu
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get install apache2 -y
+RUN apt-get install apache2-utils -y
+RUN apt-get clean
+EXPOSE 80
+CMD ["apache2ctl","-D","FOREGROUND"]
